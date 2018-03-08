@@ -12,7 +12,6 @@ const fail = actionGen(FAIL)
 const web3 = new Web3()
 const web3WS = new Web3() // since MetaMask doesn't support WebSockets we need this extra client for events subscribing
 
-// noinspection JSUnusedGlobalSymbols
 export const init = () => async (dispatch) => {
   try {
     let id

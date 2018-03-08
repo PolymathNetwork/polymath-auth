@@ -7,7 +7,6 @@ const defaultState = {
   account: null,
 }
 
-// noinspection JSUnusedGlobalSymbols
 export default (state = defaultState, action) => {
   switch (action.type) {
     case a.CONNECTED:
