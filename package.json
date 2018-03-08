@@ -1,5 +1,5 @@
 {
-  "name": "polymath.js",
+  "name": "polymath-auth",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
