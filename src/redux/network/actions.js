@@ -58,6 +58,7 @@ export const init = () => async (dispatch) => {
         console.error('web3WS newBlockHeaders', error)
       }
     })
+
     dispatch(connected({ name, account }))
   } catch (e) {
     // eslint-disable-next-line
