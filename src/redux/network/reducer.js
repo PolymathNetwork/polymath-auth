@@ -3,8 +3,11 @@ import * as a from './actions'
 const defaultState = {
   isConnected: false,
   isFailed: false,
+  id: null,
   name: null,
   account: null,
+  web3: null,
+  web3WS: null
 }
 
 export default (state = defaultState, action) => {
@@ -13,8 +16,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         isConnected: true,
-        name: action.name,
-        account: action.account,
+        ...action
       }
     case a.FAIL:
       return {

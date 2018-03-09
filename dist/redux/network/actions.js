@@ -81,7 +81,7 @@ var init = exports.init = function init() {
         }
       });
 
-      dispatch(connected({ name: name, account: account }));
+      dispatch(connected({ id: id, name: name, account: account, web3: web3, web3WS: web3WS }));
     } catch (e) {
       // eslint-disable-next-line
       console.error('Network initialization failed', e);

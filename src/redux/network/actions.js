@@ -58,7 +58,7 @@ export const init = () => async (dispatch) => {
       }
     })
 
-    dispatch(connected({ name, account }))
+    dispatch(connected({ id, name, account, web3, web3WS }))
   } catch (e) {
     // eslint-disable-next-line
     console.error('Network initialization failed', e)

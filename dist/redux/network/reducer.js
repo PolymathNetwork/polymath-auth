@@ -15,8 +15,11 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var defaultState = {
   isConnected: false,
   isFailed: false,
+  id: null,
   name: null,
-  account: null
+  account: null,
+  web3: null,
+  web3WS: null
 };
 
 exports.default = function () {
@@ -26,10 +29,8 @@ exports.default = function () {
   switch (action.type) {
     case a.CONNECTED:
       return _extends({}, state, {
-        isConnected: true,
-        name: action.name,
-        account: action.account
-      });
+        isConnected: true
+      }, action);
     case a.FAIL:
       return _extends({}, state, {
         isConnected: false,
