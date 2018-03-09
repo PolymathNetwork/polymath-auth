@@ -15,7 +15,7 @@ const web3WS = new Web3() // since MetaMask doesn't support WebSockets we need t
 export const init = () => async (dispatch) => {
   try {
     let id
-    if (typeof window.web3 !== undefined) { // Metamask/Mist
+    if (typeof window.web3 !== 'undefined') { // Metamask/Mist
       web3.setProvider(window.web3.currentProvider)
       id = await web3.eth.net.getId()
     }

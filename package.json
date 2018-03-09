@@ -1,6 +1,6 @@
 {
   "name": "polymath-auth",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "private": true,
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -25,11 +25,13 @@
     "web3-core-method": "github:bshevchenko/web3-core-method#master",
     "web3-eth-contract": "1.0.0-beta.30"
   },
+  "main": "./dist/index.js",
   "scripts": {
     "start-lint": "esw -w --fix src",
     "lint": "eslint --fix src",
     "precommit": "lint-staged",
-    "build": "babel src --out-dir dist"
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run build"
   },
   "lint-staged": {
     "src/**/*.js": [
