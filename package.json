@@ -1,17 +1,26 @@
 {
   "name": "polymath-auth",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-eslint": "7.2.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
     "eslint": "4.11.0",
-    "eslint-plugin-polymath": "github:PolymathNetwork/eslint-plugin-polymath",
+    "eslint-plugin-polymath": "github:PolymathNetwork/eslint-plugin-polymath#1.0.0",
     "husky": "0.14.3",
     "lint-staged": "5.0.0"
   },
   "dependencies": {
+    "prop-types": "15.6.0",
+    "react": "15.5.4",
     "redux": "3.7.2",
     "redux-thunk": "2.2.0",
+    "react-redux": "5.0.6",
     "web3": "1.0.0-beta.30",
     "web3-core-method": "github:bshevchenko/web3-core-method#master",
     "web3-eth-contract": "1.0.0-beta.30"
@@ -19,7 +28,8 @@
   "scripts": {
     "start-lint": "esw -w --fix src",
     "lint": "eslint --fix src",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "build": "babel src --out-dir dist"
   },
   "lint-staged": {
     "src/**/*.js": [

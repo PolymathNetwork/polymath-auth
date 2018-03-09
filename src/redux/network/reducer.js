@@ -1,8 +1,8 @@
 import * as a from './actions'
 
 const defaultState = {
-  connected: false,
-  fail: false,
+  isConnected: false,
+  isFailed: false,
   name: null,
   account: null,
 }
@@ -12,15 +12,15 @@ export default (state = defaultState, action) => {
     case a.CONNECTED:
       return {
         ...state,
-        connected: true,
+        isConnected: true,
         name: action.name,
         account: action.account,
       }
     case a.FAIL:
       return {
         ...state,
-        connected: false,
-        fail: true,
+        isConnected: false,
+        isFailed: true,
       }
     default:
       return state
