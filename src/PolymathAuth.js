@@ -13,7 +13,9 @@ class PolymathAuth extends Component {
   };
 
   componentWillMount () {
-    this.props.init()
+    window.addEventListener('load', () => {
+      this.props.init()
+    })
   }
 
   render () {
