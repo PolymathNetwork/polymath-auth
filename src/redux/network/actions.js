@@ -28,6 +28,7 @@ export const init = () => async (dispatch) => {
       // eslint-disable-next-line
       console.log('Using localhost')
       web3.setProvider(web3WS.currentProvider)
+      id = await web3.eth.net.getId()
     }
 
     const [account] = await web3.eth.getAccounts()

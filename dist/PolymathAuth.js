@@ -39,7 +39,11 @@ var PolymathAuth = function (_Component) {
   _createClass(PolymathAuth, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.props.init();
+      var _this2 = this;
+
+      window.addEventListener('load', function () {
+        _this2.props.init();
+      });
     }
   }, {
     key: 'render',

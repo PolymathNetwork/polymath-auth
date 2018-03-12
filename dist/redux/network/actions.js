@@ -46,6 +46,7 @@ var init = exports.init = function init() {
         // eslint-disable-next-line
         console.log('Using localhost');
         web3.setProvider(web3WS.currentProvider);
+        id = await web3.eth.net.getId();
       }
 
       var _ref = await web3.eth.getAccounts(),
