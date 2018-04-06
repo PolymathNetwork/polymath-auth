@@ -1,10 +1,3 @@
-import 'babel-polyfill'
-
-import network from './redux/network/reducer'
-import PolymathAuth from './PolymathAuth'
-
-export const reducers = {
-  network
-}
-
-export default PolymathAuth
+export { default as reducer } from './reducer'
+export default from './PolymathAuth'
+export type { NetworkState } from './reducer'
