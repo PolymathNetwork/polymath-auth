@@ -1,21 +1,46 @@
+// @flow
+
 // eslint-disable-next-line
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+// eslint-disable-next-line
+import { Loading } from 'carbon-components-react'
+import type { Node } from 'react'
 
-import { init } from './redux/network/actions'
+import { init } from './actions'
 
-class PolymathAuth extends Component {
-  static propTypes = {
-    init: PropTypes.func.isRequired,
-    isConnected: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired
-  };
+type StateProps = {|
+  isConnected: boolean,
+  isFailed: boolean,
+|}
+
+type DispatchProps = {|
+  init: () => any,
+|}
+
+const mapStateToProps = (state): StateProps => ({
+  isConnected: state.network.isConnected,
+  isFailed: state.network.isFailed
+})
+
+const mapDispatchToProps: DispatchProps = {
+  init,
+}
+
+type Props = {|
+  children: Node,
+|} & StateProps & DispatchProps
+
+class PolymathAuth extends Component<Props> {
 
   componentWillMount () {
-    window.addEventListener('load', () => {
+    if (document.readyState === 'complete') {
       this.props.init()
-    })
+    } else {
+      window.addEventListener('load', () => {
+        this.props.init()
+      })
+    }
   }
 
   render () {
@@ -23,7 +48,7 @@ class PolymathAuth extends Component {
       return this.props.children
     }
     if (!this.props.isFailed) {
-      return <p>Initializing connection to the blockchain...</p>
+      return <Loading />
     }
     return (
       <p>
@@ -34,15 +59,6 @@ class PolymathAuth extends Component {
       </p>
     )
   }
-}
-
-const mapStateToProps = (state) => ({
-  isConnected: state.network.isConnected,
-  isFailed: state.network.isFailed
-})
-
-const mapDispatchToProps = {
-  init
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PolymathAuth)

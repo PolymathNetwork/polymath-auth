@@ -1,14 +1,16 @@
+// @flow
+
 type Network = {
   name: string,
   url: string
 }
 
-export default (id = 'local'): Network => ({
-  1: {
+export default (id: string = 'local'): Network => ({
+  '1': {
     name: 'Mainnet',
     url: 'wss://mainnet.infura.io/ws'
   },
-  3: {
+  '3': {
     name: 'Ropsten Testnet',
     url: 'wss://ropsten.infura.io/ws'
   },

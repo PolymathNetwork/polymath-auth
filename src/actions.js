@@ -1,18 +1,25 @@
+// @flow
+
 import Web3 from 'web3'
 
-import { actionGen } from '../helpers'
-import getNetwork from '../../networks'
+import getNetwork from './networks'
+import type { NetworkParams } from '../types'
+import type { ExtractReturn } from './helpers'
 
-export const CONNECTED = 'network/CONNECTED'
-export const FAIL = 'network/FAIL'
+export const CONNECTED = 'polymath-auth/CONNECTED'
+const connected = (params: NetworkParams) => ({ type: CONNECTED, params })
 
-const connected = actionGen(CONNECTED)
-const fail = actionGen(FAIL)
+export const FAIL = 'polymath-auth/FAIL'
+const fail = () => ({ type: FAIL })
+
+export type Action =
+  | ExtractReturn<typeof connected>
+  | ExtractReturn<typeof fail>
 
 const web3 = new Web3()
 const web3WS = new Web3() // since MetaMask doesn't support WebSockets we need this extra client for events subscribing
 
-export const init = () => async (dispatch) => {
+export const init = () => async (dispatch: Function) => {
   try {
     let id
     if (typeof window.web3 !== 'undefined') { // Metamask/Mist
@@ -31,6 +38,7 @@ export const init = () => async (dispatch) => {
       id = await web3.eth.net.getId()
     }
 
+    const name = network.name
     const [account] = await web3.eth.getAccounts()
     if (id) {
       // https://github.com/MetaMask/faq/blob/master/DEVELOPERS.md#ear-listening-for-selected-account-changes

@@ -1,6 +1,10 @@
-import * as a from './actions'
+// @flow
 
-const defaultState = {
+import * as a from './actions'
+import type { Action } from './actions'
+import type { NetworkState } from '../types'
+
+const defaultState: NetworkState = {
   isConnected: false,
   isFailed: false,
   id: null,
@@ -10,13 +14,13 @@ const defaultState = {
   web3WS: null
 }
 
-export default (state = defaultState, action) => {
+export default (state: NetworkState = defaultState, action: Action) => {
   switch (action.type) {
     case a.CONNECTED:
       return {
         ...state,
         isConnected: true,
-        ...action
+        ...action.params
       }
     case a.FAIL:
       return {
