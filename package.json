@@ -1,6 +1,6 @@
 {
   "name": "polymath-auth",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "7.2.3",

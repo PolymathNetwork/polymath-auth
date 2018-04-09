@@ -34,12 +34,14 @@ type Props = {|
 class PolymathAuth extends Component<Props> {
 
   componentWillMount () {
-    if (document.readyState === 'complete') {
-      this.props.init()
-    } else {
-      window.addEventListener('load', () => {
+    if (!this.props.isConnected && !this.props.isFailed) {
+      if (document.readyState === 'complete') {
         this.props.init()
-      })
+      } else {
+        window.addEventListener('load', () => {
+          this.props.init()
+        })
+      }
     }
   }
 
