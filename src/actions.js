@@ -19,6 +19,18 @@ export type Action =
 const web3 = new Web3()
 const web3WS = new Web3() // since MetaMask doesn't support WebSockets we need this extra client for events subscribing
 
+const setUpFullStory = (account: string) => {
+  const FS = global.FS
+
+  if (!FS) {
+    return
+  }
+
+  FS.identify(account, {
+    ethAddress: account
+  })
+}
+
 export const init = () => async (dispatch: Function) => {
   try {
     let id
@@ -40,6 +52,9 @@ export const init = () => async (dispatch: Function) => {
 
     const name = network.name
     const [account] = await web3.eth.getAccounts()
+
+    setUpFullStory(account)
+
     if (id) {
       // https://github.com/MetaMask/faq/blob/master/DEVELOPERS.md#ear-listening-for-selected-account-changes
       setInterval(() => {
