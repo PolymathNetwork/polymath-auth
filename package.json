@@ -35,7 +35,7 @@
     "start-lint": "esw -w --fix src",
     "lint": "eslint --fix src",
     "typecheck": "flow",
-    "precommit": "lint-staged & npm run typecheck",
+    "precommit": "lint-staged && npm run typecheck",
     "build": "babel src --out-dir dist",
     "prepublish": "npm run build"
   },
