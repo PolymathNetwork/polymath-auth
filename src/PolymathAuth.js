@@ -3,8 +3,6 @@
 // eslint-disable-next-line
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// eslint-disable-next-line
-import { Loading } from 'carbon-components-react'
 import type { Node } from 'react'
 
 import { init } from './actions'
@@ -12,15 +10,17 @@ import { init } from './actions'
 type StateProps = {|
   isConnected: boolean,
   isFailed: boolean,
+  error: ?number,
 |}
 
 type DispatchProps = {|
-  init: () => any,
+  init: (networks: Array<number>) => any,
 |}
 
 const mapStateToProps = (state): StateProps => ({
   isConnected: state.network.isConnected,
-  isFailed: state.network.isFailed
+  isFailed: state.network.isFailed,
+  error: state.network.error,
 })
 
 const mapDispatchToProps: DispatchProps = {
@@ -29,17 +29,24 @@ const mapDispatchToProps: DispatchProps = {
 
 type Props = {|
   children: Node,
+  loading: Node,
+  guide: Node,
+  networks: Array<number>
 |} & StateProps & DispatchProps
 
 class PolymathAuth extends Component<Props> {
 
+  init = () => {
+    this.props.init(this.props.networks)
+  }
+
   componentWillMount () {
     if (!this.props.isConnected && !this.props.isFailed) {
       if (document.readyState === 'complete') {
-        this.props.init()
+        this.init()
       } else {
         window.addEventListener('load', () => {
-          this.props.init()
+          this.init()
         })
       }
     }
@@ -50,16 +57,9 @@ class PolymathAuth extends Component<Props> {
       return this.props.children
     }
     if (!this.props.isFailed) {
-      return <Loading />
+      return this.props.loading
     }
-    return (
-      <p>
-        Oops! Something is wrong with connection to the contracts.
-        <br />
-        Please make sure that you choose Ropsten network and your
-        Mist/Metamask is unlocked.
-      </p>
-    )
+    return this.props.guide
   }
 }
 
