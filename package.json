@@ -1,6 +1,6 @@
 {
   "name": "polymath-auth",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "7.2.3",
@@ -25,7 +25,6 @@
     "redux": "3.7.2",
     "redux-thunk": "2.2.0",
     "react-redux": "5.0.6",
-    "carbon-components-react": "5.31.1",
     "web3": "1.0.0-beta.30",
     "web3-core-method": "github:bshevchenko/web3-core-method#master",
     "web3-eth-contract": "1.0.0-beta.30"

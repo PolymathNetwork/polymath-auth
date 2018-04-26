@@ -3,14 +3,21 @@
 import Web3 from 'web3'
 
 import getNetwork from './networks'
-import type { NetworkParams } from '../types'
 import type { ExtractReturn } from './helpers'
+
+export type NetworkParams = {|
+  id: number,
+  name: string,
+  account: string,
+  web3: Web3,
+  web3WS: Web3,
+|}
 
 export const CONNECTED = 'polymath-auth/CONNECTED'
 const connected = (params: NetworkParams) => ({ type: CONNECTED, params })
 
 export const FAIL = 'polymath-auth/FAIL'
-const fail = () => ({ type: FAIL })
+const fail = (error: number) => ({ type: FAIL, error })
 
 export type Action =
   | ExtractReturn<typeof connected>
@@ -19,21 +26,24 @@ export type Action =
 const web3 = new Web3()
 const web3WS = new Web3() // since MetaMask doesn't support WebSockets we need this extra client for events subscribing
 
-export const init = () => async (dispatch: Function) => {
+export const ERROR_NOT_INSTALLED = 1
+export const ERROR_LOCKED = 2
+export const ERROR_NETWORK = 3
+
+export const init = (networks: Array<number>) => async (dispatch: Function) => {
   try {
-    let id
+    let id = undefined
     if (typeof window.web3 !== 'undefined') { // Metamask/Mist
       web3.setProvider(window.web3.currentProvider)
       id = await web3.eth.net.getId()
     }
-    const network = getNetwork(id)
-    if (network === undefined) {
-      throw new Error('unsupported network')
+    const isLocalhost = Number(id) > 10000000 || id === undefined
+    const network = getNetwork(!isLocalhost ? id : undefined)
+    if (network === undefined || (!isLocalhost && !networks.includes(Number(id)))) {
+      throw new Error(ERROR_NETWORK)
     }
-    web3WS.setProvider(new Web3.providers.WebsocketProvider(network.url))
+    web3WS.setProvider(network.url)
     if (!id) {
-      // eslint-disable-next-line
-      console.log('Using localhost')
       web3.setProvider(web3WS.currentProvider)
       id = await web3.eth.net.getId()
     }
@@ -56,7 +66,7 @@ export const init = () => async (dispatch: Function) => {
       }, 100)
     }
     if (!account) {
-      throw new Error('invalid account')
+      throw new Error(ERROR_LOCKED)
     }
 
     // TODO @bshevchenko: https://github.com/INFURA/infura/issues/80 hack below
@@ -69,8 +79,11 @@ export const init = () => async (dispatch: Function) => {
 
     dispatch(connected({ id, name, account, web3, web3WS }))
   } catch (e) {
-    // eslint-disable-next-line
-    console.error('Network initialization failed', e)
-    dispatch(fail())
+    if (![ERROR_LOCKED, ERROR_NETWORK].includes(Number(e.message))) {
+      // eslint-disable-next-line
+      console.error('polymath-auth', e)
+      e.message = ERROR_NOT_INSTALLED
+    }
+    dispatch(fail(e.message))
   }
 }

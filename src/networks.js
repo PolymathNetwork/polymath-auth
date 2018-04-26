@@ -2,7 +2,7 @@
 
 type Network = {
   name: string,
-  url: string
+  url: string,
 }
 
 export default (id: string = 'local'): Network => ({
