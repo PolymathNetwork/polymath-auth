@@ -14,7 +14,7 @@ type StateProps = {|
 |}
 
 type DispatchProps = {|
-  init: (networks: Array<number>) => any,
+  init: (networks: Array<string>) => any,
 |}
 
 const mapStateToProps = (state): StateProps => ({
@@ -31,7 +31,7 @@ type Props = {|
   children: Node,
   loading: Node,
   guide: Node,
-  networks: Array<number>
+  networks: Array<string>
 |} & StateProps & DispatchProps
 
 class PolymathAuth extends Component<Props> {

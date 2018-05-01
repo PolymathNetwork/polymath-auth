@@ -5,15 +5,28 @@ type Network = {
   url: string,
 }
 
+export const NETWORK_MAIN = '1'
+export const NETWORK_ROPSTEN = '3'
+export const NETWORK_RINKEBY = '4'
+export const NETWORK_KOVAN = '42'
+
 export default (id: string = 'local'): Network => ({
-  '1': {
+  [NETWORK_MAIN]: {
     name: 'Mainnet',
     url: 'wss://mainnet.infura.io/ws'
   },
-  '3': {
+  [NETWORK_ROPSTEN]: {
     name: 'Ropsten Testnet',
     url: 'wss://ropsten.infura.io/ws'
   },
+  [NETWORK_RINKEBY]: {
+    name: 'Rinkeby Testnet',
+    url: 'wss://rinkeby.infura.io/ws'
+  },
+  // [NETWORK_KOVAN]: {
+  //   name: 'Kovan Testnet',
+  //   url: 'wss://kovan.infura.io/ws'
+  // },
   local: {
     name: 'Localhost',
     url: 'ws://localhost:8545'

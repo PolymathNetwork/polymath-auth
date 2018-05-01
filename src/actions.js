@@ -29,8 +29,9 @@ const web3WS = new Web3() // since MetaMask doesn't support WebSockets we need t
 export const ERROR_NOT_INSTALLED = 1
 export const ERROR_LOCKED = 2
 export const ERROR_NETWORK = 3
+export const ERROR_DISCONNECTED = 4
 
-export const init = (networks: Array<number>) => async (dispatch: Function) => {
+export const init = (networks: Array<string>) => async (dispatch: Function) => {
   try {
     let id = undefined
     if (typeof window.web3 !== 'undefined') { // Metamask/Mist
@@ -39,7 +40,7 @@ export const init = (networks: Array<number>) => async (dispatch: Function) => {
     }
     const isLocalhost = Number(id) > 10000000 || id === undefined
     const network = getNetwork(!isLocalhost ? id : undefined)
-    if (network === undefined || (!isLocalhost && !networks.includes(Number(id)))) {
+    if (network === undefined || (!isLocalhost && !networks.includes(String(id)))) {
       throw new Error(ERROR_NETWORK)
     }
     web3WS.setProvider(network.url)
@@ -74,6 +75,7 @@ export const init = (networks: Array<number>) => async (dispatch: Function) => {
       if (error) {
         // eslint-disable-next-line
         console.error('web3WS newBlockHeaders', error)
+        dispatch(fail(ERROR_DISCONNECTED))
       }
     })
 
