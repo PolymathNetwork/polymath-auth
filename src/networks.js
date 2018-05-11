@@ -21,7 +21,7 @@ export default (id: string = 'local'): Network => ({
   },
   [NETWORK_RINKEBY]: {
     name: 'Rinkeby Testnet',
-    url: 'wss://rinkeby.infura.io/ws'
+    url: 'wss://literally-sweet-toucan.quiknode.io/bccec097-e5b3-4af6-89ad-e801348cd020/E8IXmvjZj_C0njVBM7tTxA==/'
   },
   // [NETWORK_KOVAN]: {
   //   name: 'Kovan Testnet',
