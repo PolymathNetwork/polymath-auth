@@ -21,7 +21,7 @@ export default (id: string = 'local'): Network => ({
   },
   [NETWORK_RINKEBY]: {
     name: 'Rinkeby Testnet',
-    url: 'wss://literally-sweet-toucan.quiknode.io/bccec097-e5b3-4af6-89ad-e801348cd020/E8IXmvjZj_C0njVBM7tTxA==/'
+    url: 'wss://heartily-internal-escargot.quiknode.io/46df7525-5518-428e-b30b-9dea09480213/4oM662IRx_2tZJq3ht4wdQ==/'
   },
   // [NETWORK_KOVAN]: {
   //   name: 'Kovan Testnet',
