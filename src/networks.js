@@ -21,12 +21,12 @@ export default (id: string = 'local'): Network => ({
   },
   [NETWORK_RINKEBY]: {
     name: 'Rinkeby Testnet',
+    url: 'wss://rinkeby.infura.io/ws'
+  },
+  [NETWORK_KOVAN]: {
+    name: 'Kovan Testnet',
     url: 'wss://heartily-internal-escargot.quiknode.io/46df7525-5518-428e-b30b-9dea09480213/4oM662IRx_2tZJq3ht4wdQ==/'
   },
-  // [NETWORK_KOVAN]: {
-  //   name: 'Kovan Testnet',
-  //   url: 'wss://kovan.infura.io/ws'
-  // },
   local: {
     name: 'Localhost',
     url: 'ws://localhost:8545'
