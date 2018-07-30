@@ -13,7 +13,7 @@ export const NETWORK_KOVAN = '42'
 export default (id: string = 'local'): Network => ({
   [NETWORK_MAIN]: {
     name: 'Mainnet',
-    url: 'wss://mainnet.infura.io/ws'
+    url: 'wss://easily-complete-starfish.quiknode.io/99f426a7-0f3d-427b-aae2-df6ad61fcf1e/lh7cRkafeab5UaYu4OpQpA==/'
   },
   [NETWORK_ROPSTEN]: {
     name: 'Ropsten Testnet',
