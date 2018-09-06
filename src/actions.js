@@ -43,7 +43,7 @@ export const init = (networks: Array<string>) => async (dispatch: Function) => {
     if (network === undefined || (!isLocalhost && !networks.includes(String(id)))) {
       throw new Error(ERROR_NETWORK)
     }
-    web3WS.setProvider(network.url)
+    web3WS.setProvider(process.env.REACT_APP_NODE_WS || network.url)
     if (!id) {
       web3.setProvider(web3WS.currentProvider)
       id = await web3.eth.net.getId()
