@@ -13,7 +13,7 @@ export const NETWORK_KOVAN = '42'
 export default (id: string = 'local'): Network => ({
   [NETWORK_MAIN]: {
     name: 'Mainnet',
-    url: process.env.REACT_APP_NETWORK_MAIN
+    url: process.env.REACT_APP_NETWORK_MAIN_URL
   },
   [NETWORK_ROPSTEN]: {
     name: 'Ropsten Testnet',
@@ -25,7 +25,7 @@ export default (id: string = 'local'): Network => ({
   },
   [NETWORK_KOVAN]: {
     name: 'Kovan Testnet',
-    url: process.env.REACT_APP_NETWORK_KOVAN
+    url: process.env.REACT_APP_NETWORK_KOVAN_URL
   },
   local: {
     name: 'Localhost',
